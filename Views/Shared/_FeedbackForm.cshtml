@@ -1,0 +1,66 @@
+@model Feedback
+
+@* Shows only model-level errors; field errors appear under each input *@
+@Html.ValidationSummary(true, "Please fix the errors below.", new { @class = "alert alert-danger" })
+
+<div class="row g-3">
+
+    <div class="col-md-6">
+        @Html.LabelFor(m => m.Name, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "e.g. Riya Sharma" })
+        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger small" })
+    </div>
+
+    <div class="col-md-6">
+        @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email", placeholder = "you@example.com" })
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger small" })
+    </div>
+
+    <div class="col-md-6">
+        @Html.LabelFor(m => m.Phone, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", placeholder = "Optional" })
+        @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger small" })
+    </div>
+
+    <div class="col-md-6">
+        @Html.LabelFor(m => m.Category, new { @class = "form-label" })
+        @Html.DropDownListFor(m => m.Category,
+            new SelectList(FeedbackCategories.All, Model.Category),
+            "-- Select Category --",
+            new { @class = "form-select" })
+        @Html.ValidationMessageFor(m => m.Category, "", new { @class = "text-danger small" })
+    </div>
+
+    <div class="col-md-6">
+        @Html.LabelFor(m => m.VisitDate, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.VisitDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+        @Html.ValidationMessageFor(m => m.VisitDate, "", new { @class = "text-danger small" })
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label d-block">Rating</label>
+        @for (int i = 1; i <= 5; i++)
+        {
+            <div class="form-check form-check-inline">
+                @Html.RadioButtonFor(m => m.Rating, i, new { @class = "form-check-input", id = "Rating_" + i })
+                <label class="form-check-label" for="Rating_@i">@i ★</label>
+            </div>
+        }
+        <div>@Html.ValidationMessageFor(m => m.Rating, "", new { @class = "text-danger small" })</div>
+    </div>
+
+    <div class="col-12">
+        @Html.LabelFor(m => m.Comments, new { @class = "form-label" })
+        @Html.TextAreaFor(m => m.Comments, 5, 40, new { @class = "form-control", placeholder = "Tell us about your experience (10-500 characters)" })
+        @Html.ValidationMessageFor(m => m.Comments, "", new { @class = "text-danger small" })
+    </div>
+
+    <div class="col-12">
+        <div class="form-check">
+            @Html.CheckBoxFor(m => m.WouldRecommend, new { @class = "form-check-input" })
+            @Html.LabelFor(m => m.WouldRecommend, new { @class = "form-check-label" })
+        </div>
+    </div>
+
+</div>

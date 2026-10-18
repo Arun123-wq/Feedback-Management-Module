@@ -1,0 +1,14 @@
+@model Feedback
+
+<tr>
+    <td>@Model.Name</td>
+    <td><span class="badge text-bg-secondary">@Model.Category</span></td>
+    <td>@Html.RatingStars(Model.Rating)</td>
+    <td class="text-truncate" style="max-width:260px">@Model.Comments</td>
+    <td>@Model.SubmittedOn.ToString("dd MMM yyyy")</td>
+    <td class="text-nowrap">
+        @Html.ActionLink("Details", "Details", "Feedback", new { id = Model.Id }, new { @class = "btn btn-sm btn-outline-primary" })
+        @Html.ActionLink("Edit", "Edit", "Feedback", new { id = Model.Id }, new { @class = "btn btn-sm btn-outline-secondary" })
+        @Html.ActionLink("Delete", "Delete", "Feedback", new { id = Model.Id }, new { @class = "btn btn-sm btn-outline-danger" })
+    </td>
+</tr>

@@ -1,0 +1,54 @@
+@model FeedbackListViewModel
+@{
+    ViewData["Title"] = "All Feedback";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">All Feedback</h2>
+    @Html.ActionLink("+ New Feedback", "Create", "Feedback", null, new { @class = "btn btn-primary" })
+</div>
+
+@* PARTIAL VIEW: statistics *@
+@await Html.PartialAsync("_FeedbackSummary", Model)
+
+@* Search / filter form (GET) built with HTML helpers *@
+@using (Html.BeginForm("Index", "Feedback", FormMethod.Get, new { @class = "row g-2 mb-3" }))
+{
+    <div class="col-md-5">
+        @Html.TextBox("search", Model.Search, new { @class = "form-control", placeholder = "Search by name or comments" })
+    </div>
+    <div class="col-md-4">
+        @Html.DropDownList("category",
+            new SelectList(FeedbackCategories.All, Model.Category),
+            "All Categories",
+            new { @class = "form-select" })
+    </div>
+    <div class="col-md-3 d-grid d-md-flex gap-2">
+        <button type="submit" class="btn btn-secondary">Filter</button>
+        @Html.ActionLink("Reset", "Index", "Feedback", null, new { @class = "btn btn-outline-secondary" })
+    </div>
+}
+
+@if (!Model.Items.Any())
+{
+    <div class="alert alert-info">No feedback found.</div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Name</th><th>Category</th><th>Rating</th><th>Comments</th><th>Date</th><th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    @* PARTIAL VIEW: one row per feedback *@
+                    @await Html.PartialAsync("_FeedbackRow", item)
+                }
+            </tbody>
+        </table>
+    </div>
+}
