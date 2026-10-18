@@ -1,0 +1,4 @@
+.rating-stars { color: #f5a623; letter-spacing: 2px; font-size: 1.1rem; }
+.field-validation-error { display: block; }
+.input-validation-error { border-color: #dc3545 !important; }
+.validation-summary-errors ul { margin-bottom: 0; }

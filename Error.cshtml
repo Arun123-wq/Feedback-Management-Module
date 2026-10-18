@@ -1,0 +1,8 @@
+@{
+    ViewData["Title"] = "Error";
+}
+<div class="text-center py-5">
+    <h1 class="text-danger">Oops!</h1>
+    <p class="lead">Something went wrong while processing your request.</p>
+    @Html.ActionLink("Back to Home", "Index", "Home", null, new { @class = "btn btn-primary" })
+</div>

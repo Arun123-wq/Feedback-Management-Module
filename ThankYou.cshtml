@@ -1,0 +1,9 @@
+@{
+    ViewData["Title"] = "Thank You";
+}
+<div class="text-center py-5">
+    <h1 class="text-success">Thank you!</h1>
+    <p class="lead">Your feedback has been recorded. We appreciate your time.</p>
+    @Html.ActionLink("Submit Another", "Create", "Feedback", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("View All Feedback", "Index", "Feedback", null, new { @class = "btn btn-outline-secondary" })
+</div>

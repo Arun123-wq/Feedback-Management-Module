@@ -1,0 +1,9 @@
+@{
+    ViewData["Title"] = "Home";
+}
+<div class="p-5 mb-4 bg-light rounded-3 text-center">
+    <h1 class="display-5 fw-bold">We value your feedback</h1>
+    <p class="lead">Tell us what we're doing well and where we can improve.</p>
+    @Html.ActionLink("Give Feedback", "Create", "Feedback", null, new { @class = "btn btn-primary btn-lg me-2" })
+    @Html.ActionLink("View All Feedback", "Index", "Feedback", null, new { @class = "btn btn-outline-secondary btn-lg" })
+</div>
